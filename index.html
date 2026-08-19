@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Akmal Husain — Computational Scientist &amp; Astrophysicist</title>
+  <meta name="description" content="Portfolio of Muhammad Akmal Husain — Computational Scientist and Astrophysicist, specializing in machine learning, topological data analysis, and N-body simulation." />
+
+  <!-- Google Fonts: Source Sans Pro untuk teks utama, JetBrains Mono untuk
+       label teknis/data — pemilihan ini disengaja karena JetBrains Mono
+       adalah typeface yang benar-benar dipakai di lingkungan kerja
+       computational science (editor kode, terminal), bukan sekadar
+       pilihan estetika monospace generik. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <!-- ======================================================================
+       HEADER
+       Fixed di atas, berubah dari transparan ke solid+blur saat discroll
+       melewati hero (lihat initHeaderScroll di main.js).
+       ====================================================================== -->
+  <header class="site-header" data-site-header>
+    <div class="container site-header__inner">
+      <a href="#hero" class="site-logo">
+        <span class="site-logo__name">Akmal Husain</span>
+        <span class="site-logo__role">Computational Scientist</span>
+      </a>
+      <button type="button" class="menu-trigger" data-menu-trigger aria-label="Open navigation menu">
+        <span class="menu-trigger__icon"><span></span><span></span></span>
+        Menu
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       MENU OVERLAY
+       Panel navigasi penuh-layar, ditoggle via kelas .menu-open pada
+       <body> (lihat initMenuOverlay di main.js). Daftar tautan mengarah
+       ke id section pada halaman ini — TIDAK ada menu terpisah untuk
+       "Volunteering", "Experience", "Award" sebagai halaman berbeda;
+       semuanya adalah section dalam satu halaman panjang (single-page
+       layout), sesuai pola tema Forty asli.
+       ====================================================================== -->
+  <div class="menu-overlay" data-menu-overlay>
+    <button type="button" class="menu-overlay__close" data-menu-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="menu-overlay__inner">
+      <ul class="menu-overlay__list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#volunteering">Volunteering</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#activities">Activities</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="menu-overlay__meta">
+        <a href="https://github.com/AkmalHusain2003" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/muhammad-akmal-husain-8298b7209/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:akmalhusain2003@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       HERO
+       Judul + subjudul + tombol "Get Started" (poin 1 permintaan) yang
+       melakukan smooth-scroll ke section About. Latar memuat diagram
+       orbit SVG (signature element, lihat dokumentasi di main.css bagian
+       "SIGNATURE ELEMENT: DIAGRAM ORBIT TTV").
+       ====================================================================== -->
+  <section id="hero" class="hero">
+    <div class="hero__orbit" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <!-- Bintang pusat, merepresentasikan Kepler-221 -->
+        <circle class="orbit-star" cx="200" cy="200" r="5" />
+
+        <!-- Lintasan orbit (elips, dipipihkan sedikit untuk kesan
+             perspektif 3/4, bukan lingkaran sempurna, karena orbit
+             riil jarang berbentuk lingkaran) -->
+        <ellipse class="orbit-path orbit-path--outer" cx="200" cy="200" rx="180" ry="120" />
+        <ellipse class="orbit-path orbit-path--inner" cx="200" cy="200" rx="110" ry="72" />
+
+        <!-- Node planet outer: grup di-rotate mengelilingi pusat (200,200)
+             via animasi CSS orbit-outer, sedangkan posisi node di dalam
+             grup tetap statis relatif terhadap grupnya sendiri (offset
+             radial dari pusat) — inilah struktur SVG yang benar supaya
+             node BENAR-BENAR mengorbit pusat, bukan berputar di
+             tempatnya sendiri. -->
+        <g class="orbit-node orbit-node--outer">
+          <circle cx="380" cy="200" r="6" />
+        </g>
+
+        <!-- Node planet inner: periode orbit lebih cepat (durasi animasi
+             lebih pendek di CSS), merepresentasikan planet dengan
+             semi-major axis lebih kecil sesuai Hukum Kepler III
+             (T² ∝ a³) — planet lebih dekat mengorbit lebih cepat. -->
+        <g class="orbit-node orbit-node--inner">
+          <circle cx="310" cy="200" r="4.5" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow">Computational Scientist &amp; Astrophysicist</p>
+      <h1 class="hero__title">
+        Turning large-scale astronomical data into <span class="highlight">precise insight</span>
+      </h1>
+      <p class="hero__subtitle">
+        M.Sc. Computational Science &amp; B.Sc. Astronomy from Institut Teknologi Bandung. Focused on statistical learning, topological data analysis, and N-body simulation for astrophysics research and high-dimensional data systems.
+      </p>
+      <div class="hero__actions">
+        <a href="#about" class="btn btn--primary">
+          Get Started
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </a>
+        <a href="#projects" class="btn btn--ghost">View Projects</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <span class="scroll-indicator__line"></span>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       ABOUT ("Tentang Saya") — poin 2 permintaan.
+       Setiap blok anak diberi kelas .reveal dengan arah berbeda
+       (reveal--left untuk visual, reveal--right untuk teks) dan
+       data-reveal-index untuk delay berjenjang, menghasilkan efek
+       "hilang timbul" yang diminta: memudar masuk saat discroll ke
+       section ini, memudar keluar lagi saat discroll menjauh (lihat
+       mekanisme initRevealObserver di main.js).
+       ====================================================================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">About Me</p>
+        <h2 class="section__title">Science as Foundation, Data as Medium</h2>
+      </div>
+
+      <div class="about__grid">
+        <div class="about__visual reveal reveal--left" data-reveal-index="1">
+          <div class="about__visual-frame" aria-hidden="true"></div>
+          <div class="project-card__media-placeholder" style="font-family: var(--font-family-mono);">
+            Profile Photo<br />(Replace with Actual Photo)
+          </div>
+        </div>
+
+        <div class="about__body reveal reveal--right" data-reveal-index="2">
+          <p>
+            I am a Computational Scientist and Astrophysicist holding an M.Sc. in Computational Science and a B.Sc. in Astronomy, both from Institut Teknologi Bandung (ITB). My primary research identity is as a statistician and machine learning practitioner with domain expertise in astrophysics &mdash; I apply statistical methods and machine learning, both supervised and unsupervised, to extract reliable structure from large-scale, high-dimensional datasets.
+          </p>
+          <p>
+            My Master's research developed <strong>ENTRAP</strong>, a hybrid algorithm combining density-based clustering with topological data analysis to identify open star clusters in Gaia DR3 data. I am currently undertaking a research internship at <strong>ASPIRE</strong>, Anton Pannekoek Institute for Astronomy, University of Amsterdam, building an N-body simulation pipeline to study the dynamics of the Kepler-221 exoplanetary system.
+          </p>
+          <p>
+            I hold rigor derived from first principles above all else before implementation &mdash; an approach I apply consistently, both in mathematical derivation and in writing scientific code that is accurate and verifiable.
+          </p>
+
+          <div class="about__stats">
+            <div class="about__stat">
+              <span class="about__stat-value">9</span>
+              <span class="about__stat-label">Star Clusters Tested</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-value">+13%</span>
+              <span class="about__stat-label">M44 Recovery</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-value">2</span>
+              <span class="about__stat-label">Open-Source Packages</span>
+            </div>
+          </div>
+
+          <p class="about__skills-title">Technical Skills</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Cython</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">C / C++</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">Scikit-Learn</span>
+            <span class="skill-tag">AMUSE</span>
+            <span class="skill-tag">Astropy</span>
+            <span class="skill-tag">galpy</span>
+            <span class="skill-tag">CASA</span>
+            <span class="skill-tag">Linux HPC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PROJECTS — poin 4 permintaan.
+       Grid kartu DIRENDER SECARA DINAMIS oleh renderProjectPreview() di
+       main.js, membaca data dari assets/js/projects-data.js. HTML di
+       sini hanya menyediakan KERANGKA (header, filter, target grid
+       kosong) — lihat atribut data-project-grid sebagai titik injeksi.
+
+       Setiap kartu memiliki tombol "Lihat Lebih Lengkap" yang mengarah
+       ke pages/project.html?id=<id-project>, sesuai permintaan poin 4.
+       ====================================================================== -->
+  <section id="projects" class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Portfolio</p>
+        <h2 class="section__title">Projects &amp; Research</h2>
+        <p class="section__subtitle">
+          A collection of research and scientific software engineering projects, from topological clustering algorithms to N-body dynamics simulation.
+        </p>
+      </div>
+
+      <div class="project-filter reveal reveal--up" data-reveal-index="1">
+        <button type="button" class="project-filter__btn is-active" data-filter="all">All</button>
+        <button type="button" class="project-filter__btn" data-filter="research">Astrophysics Research</button>
+        <button type="button" class="project-filter__btn" data-filter="ml-tools">ML Tools</button>
+        <button type="button" class="project-filter__btn" data-filter="deep-learning">Deep Learning</button>
+      </div>
+
+      <!-- Render target: filled by renderProjectPreview() in main.js.
+           Left empty in the static markup — NOT written manually here
+           so project data stays single-sourced from projects-data.js
+           (see architecture documentation in that file).
+
+           TWO SEPARATE CONTAINERS (not one) per the Main/Other Project
+           split request. Partitioned by the `tier` field in
+           projects-data.js (see ARCHITECTURE NOTE in that file's
+           header for the tier vs featured distinction). The
+           data-project-grid attribute carries the value "main"/"other"
+           as a SELECTOR read by renderProjectPreview() -- NOT two
+           elements sharing the same boolean attribute as in the old
+           pattern. -->
+      <h3 class="project-tier-heading reveal reveal--up" data-reveal-index="2">Main Projects</h3>
+      <div class="project-grid" data-project-grid="main"></div>
+
+      <h3 class="project-tier-heading project-tier-heading--other reveal reveal--up" data-reveal-index="3">Other Projects</h3>
+      <div class="project-grid" data-project-grid="other"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       EXPERIENCE — poin 6 permintaan.
+       Urutan kronologis TERBALIK (terbaru di atas), pola timeline
+       standar untuk riwayat profesional. ASPIRE ditandai sebagai peran
+       AKTIF (kelas .is-current, memberi node timeline terisi penuh +
+       badge "Aktif") mengikuti konfirmasi eksplisit Akmal bahwa peran
+       Graduate Researcher di ITB telah selesai dan ASPIRE adalah fokus
+       riset yang sedang berjalan saat ini.
+       ====================================================================== -->
+  <section id="experience" class="section">
+    <div class="container container--narrow">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">History</p>
+        <h2 class="section__title">Experience</h2>
+      </div>
+
+      <div class="timeline" style="--timeline-accent: var(--color-accent-1);">
+        <div class="timeline-item is-current reveal reveal--up" data-reveal-index="1">
+          <p class="timeline-item__period">
+            Present
+            <span class="timeline-item__badge">Active</span>
+          </p>
+          <h3 class="timeline-item__title">Research Intern — ASPIRE Program</h3>
+          <p class="timeline-item__org">Anton Pannekoek Institute for Astronomy, University of Amsterdam &middot; Supervised by Dr. T. C. N. Boekholt</p>
+          <div class="timeline-item__desc">
+            <p>Building an N-body simulation pipeline (AMUSE/Huayno) to investigate the dynamics of the Kepler-221 exoplanetary system, remotely.</p>
+            <ul>
+              <li>Developed a full Transit Timing Variation (TTV) analysis pipeline, covering period detection via BLS periodogram and multi-start sinusoidal fitting.</li>
+              <li>Corrected simulation initial conditions using the full two-body Kepler's Third Law, verified to a numerical precision of e ~ 10⁻¹⁶.</li>
+              <li>Diagnosed and fixed astropy data-type incompatibilities in the analysis pipeline, and derived a transit-duration estimation function from first geometric principles.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="2">
+          <p class="timeline-item__period">September 2024 &ndash; August 2026</p>
+          <h3 class="timeline-item__title">Graduate Researcher</h3>
+          <p class="timeline-item__org">Institut Teknologi Bandung — Research, Community Service, and Innovation Program (P2MI)</p>
+          <div class="timeline-item__desc">
+            <p>Developed ENTRAP as Master's thesis research, spanning the full cycle from methodology derivation and implementation to validation on nine test star clusters.</p>
+            <ul>
+              <li>Designed and implemented ENTRAP's four algorithmic components (DEK, GPEE, Memory_Manager, sklearn-API class) from scratch.</li>
+              <li>Built the GUMM (Gaussian-Uniform Mixture Model) package in Cython with OpenMP parallelization.</li>
+              <li>Wrote the complete thesis documentation following standard Indonesian-language conventions (KBBI/PUEBI), as the thesis itself is written in Indonesian.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="3">
+          <p class="timeline-item__period">2023 &ndash; 2024</p>
+          <h3 class="timeline-item__title">Mentor, International Virtual Course</h3>
+          <p class="timeline-item__org">International Virtual Course Program</p>
+          <div class="timeline-item__desc">
+            <p>Mentored participants in multi-wavelength astronomical data processing using Python and Linux HPC.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       VOLUNTEERING — poin 5 permintaan.
+       Menggunakan struktur timeline yang sama dengan Experience, namun
+       dengan --timeline-accent berbeda (hijau sage, bukan cyan) supaya
+       kedua section punya identitas visual berbeda meski markup identik
+       — pola reuse komponen yang didokumentasikan di main.css bagian
+       "TIMELINE (EXPERIENCE & VOLUNTEERING)".
+       ====================================================================== -->
+  <section id="volunteering" class="section section--alt">
+    <div class="container container--narrow">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Contributions</p>
+        <h2 class="section__title">Volunteering &amp; Organizations</h2>
+      </div>
+
+      <div class="timeline" style="--timeline-accent: var(--color-accent-5);">
+        <div class="timeline-item reveal reveal--up" data-reveal-index="1">
+          <p class="timeline-item__period">2023 &ndash; 2024</p>
+          <h3 class="timeline-item__title">Head of Media, Communication, and Information</h3>
+          <p class="timeline-item__org">Himpunan Astronomi ITB (Astronomy Student Association, ITB)</p>
+          <div class="timeline-item__desc">
+            <p>Led the media, communication, and information division of the astronomy student association, responsible for communication strategy and dissemination of organizational activities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PUBLICATION — disisipkan sebelum AWARD atas permintaan eksplisit.
+
+       Struktur timeline yang sama dengan Experience & Volunteering
+       (lihat main.css bagian "TIMELINE (EXPERIENCE & VOLUNTEERING)"),
+       dengan --timeline-accent memakai --color-accent-2 (ungu lembut)
+       agar identitas visual berbeda dari ketiga section timeline
+       lainnya (accent-1 = Experience, accent-5 = Volunteering).
+
+       CATATAN AKURASI: satu item di bawah ini adalah KERANGKA STRUKTURAL
+       kosong, BUKAN placeholder berisi teks contoh — sengaja dibiarkan
+       demikian karena data publikasi asli akan diisi langsung oleh
+       pengguna. Duplikasi blok <div class="timeline-item"> ini untuk
+       setiap entri publikasi; hapus jika tidak diperlukan sebagai
+       kerangka acuan.
+
+       CLASS is-current TERSEDIA (lihat penggunaannya di section
+       Experience) untuk menandai publikasi berstatus masih berjalan,
+       mis. "under review" atau "in preparation" — tambahkan class
+       tersebut pada <div class="timeline-item"> yang relevan jika
+       diperlukan, mengikuti pola timeline-item__badge.
+       ====================================================================== -->
+  <section id="publications" class="section">
+    <div class="container container--narrow">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Scientific Work</p>
+        <h2 class="section__title">Publications</h2>
+      </div>
+
+      <div class="timeline" style="--timeline-accent: var(--color-accent-2);">
+        <div class="timeline-item is-current reveal reveal--up" data-reveal-index="1">
+          <p class="timeline-item__period">
+            2026
+            <span class="timeline-item__badge">Accepted</span>
+          </p>
+          <h3 class="timeline-item__title">A Quasar&ndash;Companion System Without AGN Outflow at z &sim; 6: The Case of PSO J083+11</h3>
+          <p class="timeline-item__org">Muhammad Akmal Husain, Irham Taufik Andika, Mochamad Ikbal Arifyanto &middot; arXiv:2604.22559</p>
+          <div class="timeline-item__desc">
+            <p>Analysis of ALMA observations of the [C&nbsp;II] 158&nbsp;&mu;m emission line and far-infrared (FIR) continuum toward the quasar-companion system PSO&nbsp;J083.8371+11.8482 at z&nbsp;=&nbsp;6.34, testing the impact of AGN activity on the companion galaxy during the cosmic reionization era. No morphological or kinematic evidence of AGN-driven outflow was found in either system; the result is interpreted as a pre-outflow accretion phase.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       ACTIVITIES — precedes AWARDS per explicit request.
+
+       Uses the award-grid pattern (NOT timeline like Experience/
+       Volunteering/Publications) because its contents are event
+       participations that each conclude at a single point in time
+       (conference/symposium presentation), not an ongoing process
+       with progression between items — consistent with why Awards
+       also uses a grid, not a timeline.
+
+       --color-accent-4 (sky blue) is used as the icon color, since
+       accent-1/2/3/5 are already used by other sections (see
+       main.css :root for the full map).
+       ====================================================================== -->
+  <section id="activities" class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Participation</p>
+        <h2 class="section__title">Activities</h2>
+      </div>
+
+      <div class="award-grid">
+        <div class="award-card reveal reveal--up" data-reveal-index="1">
+          <div class="award-card__icon" style="background: rgba(142, 169, 232, 0.12); color: var(--color-accent-4);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <p class="award-card__year">2026</p>
+          <h3 class="award-card__title">IAU Symposium 398</h3>
+          <p class="award-card__desc">Author &amp; presenter of the paper &ldquo;Analysis of a Septuple Open Cluster System and Its Extended Family in Gaia DR3&rdquo;, accepted proceeding (arXiv:2604.23093).</p>
+        </div>
+
+        <div class="award-card reveal reveal--up" data-reveal-index="2">
+          <div class="award-card__icon" style="background: rgba(142, 169, 232, 0.12); color: var(--color-accent-4);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <p class="award-card__year">2024</p>
+          <h3 class="award-card__title">ICSSTI ITB 2024</h3>
+          <p class="award-card__desc">Author &amp; presenter at the International Conference of Space Science, Technology and Innovation, organized by PUI-PT PSTIA-ITB together with DPITM-ITB.</p>
+        </div>
+
+        <div class="award-card reveal reveal--up" data-reveal-index="3">
+          <div class="award-card__icon" style="background: rgba(142, 169, 232, 0.12); color: var(--color-accent-4);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <p class="award-card__year">2026</p>
+          <h3 class="award-card__title">ASPIRE</h3>
+          <p class="award-card__desc">Remote research program at the Anton Pannekoek Institute for Astronomy, University of Amsterdam &mdash; see full details in the Experience section.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       AWARDS — per request point 7.
+
+       IMPORTANT ACCURACY NOTE: I do NOT have specific data about any
+       awards or achievements you have received — either from prior
+       conversation history or from this repo's old index.md file
+       (already removed after being replaced by index.html). Rather
+       than fabricate content (which would violate the accuracy
+       principle you emphasize), the three cards below are
+       INTENTIONALLY filled with explicit placeholders that are
+       clearly recognizable as "sample content", not real data.
+
+       Please replace the title, year, and description of each card
+       with your actual achievements. The card structure (award-card)
+       is ready to use — simply duplicate the <div class="award-card">
+       block to add a new entry, or delete any that aren't needed.
+       ====================================================================== -->
+  <section id="awards" class="section">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Recognition</p>
+        <h2 class="section__title">Awards</h2>
+        <p class="section__subtitle" style="color: var(--color-accent-3);">
+          ⚠️ Placeholder — replace with your actual achievement data before publishing.
+        </p>
+      </div>
+
+      <div class="award-grid">
+        <div class="award-card reveal reveal--up" data-reveal-index="1">
+          <div class="award-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+          </div>
+          <p class="award-card__year">[Year]</p>
+          <h3 class="award-card__title">[Award / Achievement Name]</h3>
+          <p class="award-card__desc">[Short description of context and achievement — replace with actual details]</p>
+        </div>
+
+        <div class="award-card reveal reveal--up" data-reveal-index="2">
+          <div class="award-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+          </div>
+          <p class="award-card__year">[Year]</p>
+          <h3 class="award-card__title">[Award / Achievement Name]</h3>
+          <p class="award-card__desc">[Short description of context and achievement — replace with actual details]</p>
+        </div>
+
+        <div class="award-card reveal reveal--up" data-reveal-index="3">
+          <div class="award-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+          </div>
+          <p class="award-card__year">[Year]</p>
+          <h3 class="award-card__title">[Award / Achievement Name]</h3>
+          <p class="award-card__desc">[Short description of context and achievement — replace with actual details]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       CONTACT
+       Form ini bersifat FRONT-END SAJA — belum terhubung ke backend
+       pengiriman email apa pun. Tema Forty asli memakai Formspree.io
+       untuk ini; opsi yang sama (atau alternatif seperti Web3Forms,
+       EmailJS) dapat dihubungkan nanti dengan mengubah atribut `action`
+       pada elemen <form> di bawah. Untuk sekarang, submit tombol tidak
+       melakukan apa pun selain mencegah reload halaman standar browser.
+       ====================================================================== -->
+  <section id="contact" class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Get In Touch</p>
+        <h2 class="section__title">Let's Collaborate</h2>
+        <p class="section__subtitle">
+          Open to research discussions, collaboration opportunities, and Data Scientist / Data Engineer positions.
+        </p>
+      </div>
+
+      <div class="contact__grid">
+        <div class="reveal reveal--left" data-reveal-index="1">
+          <div class="contact-method">
+            <div class="contact-method__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+            </div>
+            <div>
+              <p class="contact-method__label">Email</p>
+              <a href="mailto:akmalhusain2003@gmail.com" class="contact-method__value">akmalhusain2003@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            </div>
+            <div>
+              <p class="contact-method__label">GitHub</p>
+              <a href="https://github.com/AkmalHusain2003" target="_blank" rel="noopener noreferrer" class="contact-method__value">AkmalHusain2003</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <p class="contact-method__label">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/muhammad-akmal-husain-8298b7209/" target="_blank" rel="noopener noreferrer" class="contact-method__value">Muhammad Akmal Husain</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+              <p class="contact-method__label">ORCID</p>
+              <a href="https://orcid.org/0009-0000-4703-6252" target="_blank" rel="noopener noreferrer" class="contact-method__value">0009-0000-4703-6252</a>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal reveal--right" data-reveal-index="2" onsubmit="event.preventDefault(); alert('This form is not yet connected to an email delivery service. Connect the form element\'s action attribute to a service such as Formspree or Web3Forms.');">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__copy">&copy; 2026 Muhammad Akmal Husain. Built with pure HTML, CSS &amp; JavaScript.</p>
+      <div class="site-footer__socials">
+        <a href="https://github.com/AkmalHusain2003" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/muhammad-akmal-husain-8298b7209/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:akmalhusain2003@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       SCRIPTS
+       Load order MATTERS: projects-data.js must load BEFORE main.js,
+       because main.js (renderProjectPreview function) accesses the
+       global PROJECTS array defined in projects-data.js.
+       ====================================================================== -->
+  <script src="assets/js/projects-data.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1781 @@
+/* ==========================================================================
+   Muhammad Akmal Husain — Portfolio Stylesheet
+   Struktur mengikuti prinsip modular CSS: variabel → reset → base →
+   layout → komponen → utilitas → animasi → responsif.
+   Referensi filosofi desain: Forty theme by HTML5 UP (andrewbanchich/forty-jekyll-theme),
+   diadaptasi ulang dari Sass ke CSS custom properties native.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS (CSS Custom Properties)
+   Semua nilai desain didefinisikan sekali di sini. Mengubah karakter visual
+   situs secara global cukup dengan mengubah variabel di :root, tanpa
+   menyentuh kode di bawahnya. Ini prinsip "single source of truth" untuk
+   desain, sama seperti projects-data.js untuk konten.
+   -------------------------------------------------------------------------- */
+:root {
+  /* Palet warna: dark navy + aksen cyan (dipilih Akmal, dekat karakter
+     visual tema Forty asli, cocok untuk domain space/data science) */
+  --color-bg: #0e1229;
+  --color-bg-alt: #141a38;
+  --color-bg-card: #171d42;
+  --color-fg: #f4f6ff;
+  --color-fg-bold: #ffffff;
+  --color-fg-light: rgba(244, 246, 255, 0.65);
+  --color-fg-muted: rgba(244, 246, 255, 0.4);
+  --color-border: rgba(212, 212, 255, 0.12);
+  --color-border-strong: rgba(212, 212, 255, 0.22);
+
+  --color-highlight: #7bf1ff;
+  --color-accent-1: #6fc3df;   /* cyan biru — aksen utama */
+  --color-accent-2: #8d82c4;   /* ungu lembut */
+  --color-accent-3: #ec8d81;   /* koral — untuk highlight award/prestasi */
+  --color-accent-4: #8ea9e8;   /* biru langit */
+  --color-accent-5: #87c5a4;   /* hijau sage — untuk volunteering */
+
+  /* Tipografi */
+  --font-family: 'Source Sans Pro', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --letter-spacing-normal: 0.01em;
+  --letter-spacing-wide: 0.08em;
+  --letter-spacing-wider: 0.25em;
+
+  /* Ukuran & spacing (skala berbasis rem, dasar 16px) */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --space-unit: 1rem;
+  --content-max-width: 78rem;
+  --content-narrow-width: 52rem;
+
+  /* Durasi animasi — dipisah per jenis interaksi supaya mudah tuning */
+  --duration-menu: 0.4s;
+  --duration-transition: 0.25s;
+  --duration-fade: 0.7s;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Z-index terpusat untuk mencegah tabrakan layer */
+  --z-base: 1;
+  --z-header: 100;
+  --z-menu: 200;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE
+   Reset minimal (bukan full CSS reset seperti Normalize) — cukup untuk
+   menghilangkan inkonsistensi antar-browser pada elemen yang benar-benar
+   dipakai di halaman ini.
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Body dikunci saat menu overlay terbuka, mencegah scroll ganda di belakang
+   panel menu (perilaku yang sama dengan #wrapper transform-lock di tema Forty) */
+body.menu-open {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.25;
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.5rem); }
+
+p {
+  color: var(--color-fg-light);
+}
+
+/* Menghormati preferensi pengguna yang meminta pengurangan gerak —
+   prinsip aksesibilitas dasar, bukan fitur opsional */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. LAYOUT UTILITIES
+   -------------------------------------------------------------------------- */
+.container {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 4vw, 3rem);
+}
+
+.container--narrow {
+  max-width: var(--content-narrow-width);
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(4rem, 10vh, 7rem);
+}
+
+.section--alt {
+  background: var(--color-bg-alt);
+}
+
+.section__header {
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+  text-align: center;
+}
+
+.section__eyebrow {
+  display: inline-block;
+  color: var(--color-highlight);
+  font-family: var(--font-family-mono);
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.section__title {
+  margin-bottom: 0.75rem;
+}
+
+.section__subtitle {
+  max-width: 42rem;
+  margin-inline: auto;
+  color: var(--color-fg-light);
+}
+
+/* Heading pemisah "Main Project" / "Other Project" di dalam section
+   Projects (lihat index.html #projects). Ditempatkan setelah
+   .section__subtitle karena keduanya sama-sama elemen tipografi
+   struktural pada level section, bukan pada level kartu individual.
+   Memakai skala h3 (bukan h2 seperti section__title) karena secara
+   semantik ini adalah sub-heading DI DALAM satu section — pola yang
+   sama seperti award-card__title/timeline-item__title yang juga h3
+   di dalam section ber-h2. */
+.project-tier-heading {
+  font-family: var(--font-family-mono);
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.75rem;
+  margin-top: 3rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Heading pertama ("Main Project") tidak butuh jarak atas sebesar
+   heading kedua, karena sudah cukup diberi jarak oleh margin-bottom
+   bawaan .section__header di atasnya -- margin-top besar di sini
+   akan membuat jarak dobel yang janggal secara visual. */
+.project-tier-heading:first-of-type {
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   4. HEADER & NAVIGASI
+   Header tetap (fixed) dengan latar transparan di atas hero, lalu berubah
+   solid ketika discroll melewati area hero — logika ditangani oleh
+   IntersectionObserver di main.js (mengamati elemen #hero), BUKAN dengan
+   membaca posisi scroll manual. Ini lebih efisien secara komputasi karena
+   IntersectionObserver berjalan di luar main thread render, tidak memicu
+   layout thrashing seperti listener 'scroll' konvensional.
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-header);
+  padding-block: 1.25rem;
+  transition: background-color var(--duration-transition) var(--ease-standard),
+              border-color var(--duration-transition) var(--ease-standard),
+              backdrop-filter var(--duration-transition) var(--ease-standard);
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.is-solid {
+  background-color: rgba(14, 18, 41, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom-color: var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.site-logo__name {
+  font-weight: var(--font-weight-bold);
+  font-size: 1.05rem;
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.site-logo__role {
+  font-family: var(--font-family-mono);
+  font-size: 0.7rem;
+  color: var(--color-fg-muted);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-transition) var(--ease-standard),
+              background-color var(--duration-transition) var(--ease-standard);
+}
+
+.menu-trigger:hover {
+  border-color: var(--color-highlight);
+  background-color: rgba(123, 241, 255, 0.06);
+}
+
+.menu-trigger__icon {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-trigger__icon span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--color-fg);
+  border-radius: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   5. MENU OVERLAY
+   Mekanisme diadaptasi dari _menu.scss milik tema Forty: panel penuh-layar
+   dengan latar semi-transparan blur, konten menu diberi transform 3D
+   (rotateX) dalam kondisi tersembunyi lalu dinetralkan saat kelas
+   `.is-open` ditambahkan ke <body>. Efek ini memberi kesan "menu muncul
+   dari kedalaman" alih-alih sekadar fade datar.
+   -------------------------------------------------------------------------- */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 18, 41, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--duration-menu) var(--ease-standard),
+              visibility var(--duration-menu);
+}
+
+body.menu-open .menu-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.menu-overlay__inner {
+  width: 100%;
+  max-width: 26rem;
+  padding-inline: 2rem;
+  text-align: center;
+  transform: perspective(1200px) rotateX(18deg) translateY(10px);
+  opacity: 0;
+  transition: transform var(--duration-menu) var(--ease-out-back),
+              opacity var(--duration-menu) var(--ease-standard);
+}
+
+body.menu-open .menu-overlay__inner {
+  transform: perspective(1200px) rotateX(0deg) translateY(0);
+  opacity: 1;
+}
+
+.menu-overlay__close {
+  position: absolute;
+  top: 1.5rem;
+  right: clamp(1.5rem, 4vw, 3rem);
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-strong);
+  transition: border-color var(--duration-transition) var(--ease-standard),
+              transform var(--duration-transition) var(--ease-standard);
+}
+
+.menu-overlay__close:hover {
+  border-color: var(--color-highlight);
+  transform: rotate(90deg);
+}
+
+.menu-overlay__close svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: var(--color-fg);
+}
+
+.menu-overlay__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-overlay__list li {
+  border-top: 1px solid var(--color-border);
+}
+
+.menu-overlay__list li:first-child {
+  border-top: none;
+}
+
+.menu-overlay__list a {
+  display: block;
+  padding-block: 1.1rem;
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  transition: color var(--duration-transition) var(--ease-standard),
+              letter-spacing var(--duration-transition) var(--ease-standard);
+}
+
+.menu-overlay__list a:hover {
+  color: var(--color-highlight);
+  letter-spacing: calc(var(--letter-spacing-wide) + 0.02em);
+}
+
+.menu-overlay__meta {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.menu-overlay__meta a {
+  font-size: 1.05rem;
+  color: var(--color-fg-light);
+  transition: color var(--duration-transition) var(--ease-standard);
+}
+
+.menu-overlay__meta a:hover {
+  color: var(--color-highlight);
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION
+   Latar hero menggunakan gradient statis + pola titik halus untuk
+   merepresentasikan tema astronomi/data tanpa bergantung pada gambar
+   eksternal (menjaga performa muat halaman tetap cepat).
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 8rem 4rem;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(111, 195, 223, 0.16), transparent 55%),
+    radial-gradient(ellipse at 80% 75%, rgba(141, 130, 196, 0.14), transparent 55%),
+    var(--color-bg);
+}
+
+/* Lapisan bintang latar dibuat murni dengan CSS (radial-gradient
+   berulang, tanpa file gambar) sebagai atmosfer pasif di belakang
+   elemen signature (diagram orbit SVG, lihat .hero__orbit di bawah). */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 65% 15%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 40% 65%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1.5px 1.5px at 85% 55%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 25% 80%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1.5px 1.5px at 92% 85%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 55% 40%, rgba(255,255,255,0.3), transparent);
+  background-size: 100% 100%;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   SIGNATURE ELEMENT: DIAGRAM ORBIT TTV
+   Elemen visual paling khas di halaman ini. Alih-alih dekorasi generik,
+   diagram ini secara harfiah merepresentasikan riset TTV (Transit Timing
+   Variation) Akmal pada sistem Kepler-221 — dua orbit elips konsentris
+   dengan node planet yang bergerak pada kecepatan sudut berbeda,
+   menghasilkan pola presesi relatif yang menjadi inti fenomena TTV itu
+   sendiri (gangguan gravitasi antar-planet menyebabkan periode transit
+   satu planet bergeser terhadap prediksi orbit Keplerian murni).
+   Ditempatkan di belakang konten hero, redup, sebagai elemen atmosferik
+   yang tetap bermakna secara ilmiah alih-alih starfield polos.
+   -------------------------------------------------------------------------- */
+.hero__orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(64rem, 130vw);
+  height: min(64rem, 130vw);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__orbit svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hero__orbit .orbit-path {
+  fill: none;
+  stroke-width: 1;
+}
+
+.hero__orbit .orbit-path--outer {
+  stroke: rgba(111, 195, 223, 0.35);
+}
+
+.hero__orbit .orbit-path--inner {
+  stroke: rgba(141, 130, 196, 0.3);
+}
+
+.hero__orbit .orbit-node {
+  transform-box: fill-box;
+}
+
+.hero__orbit .orbit-node--outer {
+  fill: var(--color-accent-1);
+  transform-origin: 200px 200px;
+  animation: orbit-outer 22s linear infinite;
+}
+
+.hero__orbit .orbit-node--inner {
+  fill: var(--color-accent-2);
+  transform-origin: 200px 200px;
+  animation: orbit-inner 9s linear infinite;
+}
+
+.hero__orbit .orbit-star {
+  fill: var(--color-highlight);
+}
+
+@keyframes orbit-outer {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-inner {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__orbit .orbit-node--outer,
+  .hero__orbit .orbit-node--inner {
+    animation: none;
+  }
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+  text-align: center;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-family-mono);
+  font-size: 0.8rem;
+  color: var(--color-highlight);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero__eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-highlight);
+  box-shadow: 0 0 12px var(--color-highlight);
+}
+
+.hero__title {
+  margin-bottom: 1.25rem;
+}
+
+.hero__title .highlight {
+  background: linear-gradient(120deg, var(--color-accent-1), var(--color-highlight));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__subtitle {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  max-width: 38rem;
+  margin-inline: auto;
+  margin-bottom: 2.5rem;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   7. TOMBOL (BUTTON SYSTEM)
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.8rem;
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: transform var(--duration-transition) var(--ease-standard),
+              box-shadow var(--duration-transition) var(--ease-standard),
+              background-color var(--duration-transition) var(--ease-standard),
+              border-color var(--duration-transition) var(--ease-standard);
+}
+
+.btn--primary {
+  background: var(--color-highlight);
+  color: var(--color-bg);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(123, 241, 255, 0.25);
+}
+
+.btn--ghost {
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-fg);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-highlight);
+  color: var(--color-highlight);
+  transform: translateY(-2px);
+}
+
+.btn--small {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.75rem;
+}
+
+.btn--block {
+  width: 100%;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   8. SCROLL INDICATOR
+   -------------------------------------------------------------------------- */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-fg-muted);
+  font-family: var(--font-family-mono);
+  font-size: 0.7rem;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  animation: bounce 2.4s ease-in-out infinite;
+}
+
+.scroll-indicator__line {
+  width: 1px;
+  height: 2.5rem;
+  background: linear-gradient(to bottom, var(--color-fg-muted), transparent);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 8px); }
+}
+
+/* --------------------------------------------------------------------------
+   9. SISTEM REVEAL (FADE "HILANG TIMBUL")
+   Mekanisme: elemen berkelas `.reveal` diberi state awal tak-terlihat
+   (opacity 0, translateY positif). JavaScript menambahkan kelas
+   `.is-visible` ketika elemen memasuki viewport (via IntersectionObserver)
+   DAN melepasnya lagi ketika elemen keluar viewport — inilah yang membuat
+   efeknya "hilang timbul" (muncul-hilang berulang setiap kali discroll
+   lewat), bukan sekadar animasi satu-kali seperti reveal-on-scroll standar.
+
+   Prinsip fisis animasi: kurva easing `ease-out-back` sedikit overshoot
+   sebelum settle, meniru inersia gerak alami — konsisten dengan preferensi
+   Akmal terhadap detail yang presisi, bukan transisi linear generik.
+
+   Varian arah (`.reveal--up/down/left/right`) mengizinkan section berbeda
+   punya arah kemunculan yang berbeda tanpa duplikasi kelas dasar.
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transition: opacity var(--duration-fade) var(--ease-standard),
+              transform var(--duration-fade) var(--ease-standard);
+  will-change: opacity, transform;
+}
+
+.reveal--up {
+  transform: translateY(32px);
+}
+
+.reveal--down {
+  transform: translateY(-32px);
+}
+
+.reveal--left {
+  transform: translateX(-32px);
+}
+
+.reveal--right {
+  transform: translateX(32px);
+}
+
+.reveal--scale {
+  transform: scale(0.94);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Delay berjenjang untuk anak-anak yang muncul beruntun (mis. kartu-kartu
+   dalam grid project) — dikendalikan lewat custom property agar tidak
+   perlu kelas terpisah per indeks */
+.reveal[data-delay] {
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+/* --------------------------------------------------------------------------
+   10. ABOUT SECTION
+   -------------------------------------------------------------------------- */
+.about__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.about__visual {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.about__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about__visual-frame {
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-strong);
+  pointer-events: none;
+}
+
+.about__visual-frame::before,
+.about__visual-frame::after {
+  content: '';
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-color: var(--color-highlight);
+  border-style: solid;
+}
+
+.about__visual-frame::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+  border-radius: var(--radius-lg) 0 0 0;
+}
+
+.about__visual-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 var(--radius-lg) 0;
+}
+
+.about__body p {
+  margin-bottom: 1.1rem;
+}
+
+.about__body p:last-of-type {
+  margin-bottom: 1.75rem;
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.about__stat {
+  padding: 1.1rem 0.5rem;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+}
+
+.about__stat-value {
+  display: block;
+  font-family: var(--font-family-mono);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-highlight);
+}
+
+.about__stat-label {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.7rem;
+  color: var(--color-fg-muted);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.about__skills-title {
+  font-family: var(--font-family-mono);
+  font-size: 0.8rem;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  margin-bottom: 0.9rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-tag {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  font-family: var(--font-family-mono);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-fg-light);
+  transition: border-color var(--duration-transition) var(--ease-standard),
+              color var(--duration-transition) var(--ease-standard);
+}
+
+.skill-tag:hover {
+  border-color: var(--color-accent-1);
+  color: var(--color-fg);
+}
+
+/* --------------------------------------------------------------------------
+   11. PROJECTS SECTION
+   Tata letak grid responsif. Kartu "featured" (ENTRAP, GUMM) diberi span
+   dua kolom pada layar lebar untuk menonjolkan kedua project utama sesuai
+   konteks yang tercatat — bukan keputusan visual sembarangan, melainkan
+   merepresentasikan hierarki kepentingan project secara proporsional.
+   -------------------------------------------------------------------------- */
+.project-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.project-filter__btn {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.78rem;
+  font-family: var(--font-family-mono);
+  letter-spacing: var(--letter-spacing-normal);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-fg-muted);
+  transition: all var(--duration-transition) var(--ease-standard);
+}
+
+.project-filter__btn:hover {
+  color: var(--color-fg);
+  border-color: var(--color-border-strong);
+}
+
+.project-filter__btn.is-active {
+  background: var(--color-highlight);
+  border-color: var(--color-highlight);
+  color: var(--color-bg);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.project-card {
+  grid-column: span 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--duration-transition) var(--ease-standard),
+              border-color var(--duration-transition) var(--ease-standard),
+              box-shadow var(--duration-transition) var(--ease-standard);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.project-card--featured {
+  grid-column: span 2;
+  flex-direction: row;
+}
+
+.project-card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--color-bg-alt);
+  overflow: hidden;
+}
+
+.project-card--featured .project-card__media {
+  flex: 0 0 42%;
+  aspect-ratio: auto;
+}
+
+.project-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-standard);
+}
+
+.project-card:hover .project-card__media img {
+  transform: scale(1.05);
+}
+
+.project-card__media-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  color: var(--color-fg-muted);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  background:
+    linear-gradient(135deg, rgba(111,195,223,0.08), rgba(141,130,196,0.08));
+}
+
+.project-card__body {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card__tag {
+  align-self: flex-start;
+  padding: 0.25rem 0.7rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.68rem;
+  font-family: var(--font-family-mono);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(123, 241, 255, 0.1);
+  color: var(--color-highlight);
+}
+
+.project-card__title {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.project-card--featured .project-card__title {
+  font-size: 1.4rem;
+}
+
+.project-card__desc {
+  font-size: 0.9rem;
+  flex: 1;
+  margin-bottom: 1.1rem;
+}
+
+.project-card__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.project-card__tech span {
+  font-size: 0.7rem;
+  font-family: var(--font-family-mono);
+  color: var(--color-fg-muted);
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.project-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-highlight);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.project-card__link svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  transition: transform var(--duration-transition) var(--ease-standard);
+}
+
+.project-card__link:hover svg {
+  transform: translateX(3px);
+}
+
+.project-card__repo {
+  color: var(--color-fg-muted);
+  transition: color var(--duration-transition) var(--ease-standard);
+}
+
+.project-card__repo:hover {
+  color: var(--color-fg);
+}
+
+.project-card__repo svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.projects-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   12. TIMELINE (EXPERIENCE & VOLUNTEERING)
+   Struktur garis vertikal dengan node — pola timeline standar. Dipakai
+   ulang oleh dua section berbeda (Experience, Volunteering) dengan
+   variabel warna aksen berbeda (`--timeline-accent`) supaya keduanya
+   punya identitas visual yang berbeda meski markup identik.
+   -------------------------------------------------------------------------- */
+.timeline {
+  position: relative;
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  left: 0.5rem;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 2.75rem;
+  padding-bottom: 2.75rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0.35rem;
+  left: 0;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 2px solid var(--timeline-accent, var(--color-highlight));
+  z-index: 1;
+}
+
+.timeline-item.is-current::before {
+  background: var(--timeline-accent, var(--color-highlight));
+  box-shadow: 0 0 0 4px rgba(123, 241, 255, 0.15);
+}
+
+.timeline-item__period {
+  display: inline-block;
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  color: var(--timeline-accent, var(--color-highlight));
+  letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: 0.4rem;
+}
+
+.timeline-item__badge {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.65rem;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(123, 241, 255, 0.12);
+  color: var(--color-highlight);
+}
+
+.timeline-item__title {
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-item__org {
+  font-size: 0.85rem;
+  color: var(--color-fg-muted);
+  margin-bottom: 0.6rem;
+}
+
+.timeline-item__desc {
+  font-size: 0.9rem;
+}
+
+.timeline-item__desc ul {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timeline-item__desc li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.88rem;
+  color: var(--color-fg-light);
+}
+
+.timeline-item__desc li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-fg-muted);
+}
+
+/* --------------------------------------------------------------------------
+   13. AWARDS & PRESTASI
+   -------------------------------------------------------------------------- */
+.award-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.award-card {
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  transition: transform var(--duration-transition) var(--ease-standard),
+              border-color var(--duration-transition) var(--ease-standard);
+}
+
+.award-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-accent-3);
+}
+
+.award-card__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(236, 141, 129, 0.12);
+  color: var(--color-accent-3);
+  margin-bottom: 1rem;
+}
+
+.award-card__icon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.award-card__year {
+  font-family: var(--font-family-mono);
+  font-size: 0.72rem;
+  color: var(--color-fg-muted);
+  letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: 0.3rem;
+}
+
+.award-card__title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.award-card__desc {
+  font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   14. CONTACT SECTION
+   -------------------------------------------------------------------------- */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.contact-method {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.contact-method:last-child {
+  margin-bottom: 0;
+}
+
+.contact-method__icon {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-highlight);
+}
+
+.contact-method__icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.contact-method__label {
+  font-size: 0.75rem;
+  color: var(--color-fg-muted);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.contact-method__value {
+  font-size: 0.98rem;
+  font-weight: var(--font-weight-semibold);
+  transition: color var(--duration-transition) var(--ease-standard);
+}
+
+a.contact-method__value:hover {
+  color: var(--color-highlight);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--color-fg-muted);
+  letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: 0.45rem;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-fg);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color var(--duration-transition) var(--ease-standard);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--color-highlight);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+/* --------------------------------------------------------------------------
+   15. FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: 2.5rem;
+}
+
+.site-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-footer__copy {
+  font-size: 0.8rem;
+  color: var(--color-fg-muted);
+}
+
+.site-footer__socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.site-footer__socials a {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-fg-light);
+  transition: border-color var(--duration-transition) var(--ease-standard),
+              color var(--duration-transition) var(--ease-standard);
+}
+
+.site-footer__socials a:hover {
+  border-color: var(--color-highlight);
+  color: var(--color-highlight);
+}
+
+.site-footer__socials svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   16. RESPONSIVE BREAKPOINTS
+   Pendekatan: desktop-first dengan override progresif ke bawah, mengikuti
+   breakpoint yang dipakai tema Forty (large/medium/small) tapi disederhanakan
+   menjadi dua titik utama karena kompleksitas grid di sini lebih rendah.
+   -------------------------------------------------------------------------- */
+
+/* Large tablet / kecil laptop */
+@media (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-card--featured {
+    grid-column: span 2;
+    flex-direction: column;
+  }
+
+  .project-card--featured .project-card__media {
+    flex: none;
+    aspect-ratio: 16 / 10;
+  }
+
+  .award-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet */
+@media (max-width: 860px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__visual {
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .site-header__inner .site-logo__role {
+    display: none;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .about__stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  .about__stat {
+    padding: 0.8rem 0.3rem;
+  }
+
+  .about__stat-value {
+    font-size: 1.15rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card--featured {
+    grid-column: span 1;
+  }
+
+  .award-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   17. PAGE-TRANSITION (untuk perpindahan ke halaman detail project)
+   Efek fade-out singkat sebelum navigasi ke pages/project.html, memberi
+   kesan transisi mulus alih-alih perpindahan halaman yang tiba-tiba —
+   meniru perilaku `.is-transitioning` pada tema Forty asli, namun
+   diimplementasikan dengan CSS transition + setTimeout di JS (lihat
+   fungsi navigateWithTransition di main.js), bukan animasi kompleks.
+   -------------------------------------------------------------------------- */
+body.is-leaving {
+  animation: page-leave var(--duration-transition) var(--ease-standard) forwards;
+}
+
+@keyframes page-leave {
+  to { opacity: 0; }
+}
+
+body.is-entering {
+  animation: page-enter var(--duration-fade) var(--ease-standard);
+}
+
+@keyframes page-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   HALAMAN DETAIL PROJECT (pages/project.html)
+   Konten di-render secara dinamis oleh assets/js/project-page.js berdasar
+   parameter ?id= pada URL, memakai data dari assets/js/projects-data.js.
+   Section ini mendefinisikan tata letak untuk konten yang dirender.
+   ========================================================================== */
+
+.project-detail-header {
+  padding-top: 8rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-fg-muted);
+  margin-bottom: 2rem;
+  transition: color var(--duration-transition) var(--ease-standard);
+}
+
+.back-link:hover {
+  color: var(--color-highlight);
+}
+
+.back-link svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform var(--duration-transition) var(--ease-standard);
+}
+
+.back-link:hover svg {
+  transform: translateX(-3px);
+}
+
+.project-detail-header__tag {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
+  font-family: var(--font-family-mono);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(123, 241, 255, 0.1);
+  color: var(--color-highlight);
+}
+
+.project-detail-header__title {
+  max-width: 42rem;
+  margin-bottom: 1rem;
+}
+
+.project-detail-header__subtitle {
+  max-width: 42rem;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.project-detail-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.project-detail-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.project-detail-body {
+  padding-block: 3.5rem;
+}
+
+.project-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 18rem;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.project-prose h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+}
+
+.project-prose h2:first-child {
+  margin-top: 0;
+}
+
+.project-prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-prose p {
+  margin-bottom: 1.1rem;
+}
+
+.project-prose ul,
+.project-prose ol {
+  margin-bottom: 1.1rem;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-prose ul {
+  list-style: disc;
+}
+
+.project-prose ol {
+  list-style: decimal;
+}
+
+.project-prose li {
+  color: var(--color-fg-light);
+  font-size: 0.95rem;
+}
+
+.project-prose code {
+  font-family: var(--font-family-mono);
+  font-size: 0.85em;
+  background: var(--color-bg-card);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+.project-prose pre {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.project-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Grid figur (plot hasil) — mendukung 1 atau 2 kolom tergantung jumlah
+   gambar yang disuplai per project (lihat properti `figures` di
+   projects-data.js), sehingga plot tunggal tidak "kesepian" di grid dua
+   kolom yang setengah kosong. */
+.figure-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-block: 1.75rem;
+}
+
+.figure-grid--cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.figure-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-card);
+}
+
+.figure-item img {
+  width: 100%;
+  display: block;
+}
+
+.figure-item__caption {
+  padding: 0.85rem 1rem;
+  font-size: 0.8rem;
+  color: var(--color-fg-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+.project-sidebar {
+  position: sticky;
+  top: 6.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.sidebar-block {
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+}
+
+.sidebar-block__title {
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  margin-bottom: 1rem;
+}
+
+.sidebar-block__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.sidebar-block__list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  gap: 0.75rem;
+}
+
+.sidebar-block__list li span:first-child {
+  color: var(--color-fg-muted);
+}
+
+.sidebar-block__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.related-projects {
+  padding-top: 3.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 900px) {
+  .project-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .project-sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar-block {
+    flex: 1 1 14rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .figure-grid--cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .project-sidebar {
+    flex-direction: column;
+  }
+}
