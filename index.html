@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Akmal Husain — Computational Scientist &amp; Astrophysicist</title>
+  <meta name="description" content="Muhammad Akmal Husain's portfolio — Computational Scientist and Astrophysicist, specializing in machine learning, topological data analysis, and N-body simulations." />
+
+  <!-- Google Fonts: Source Sans Pro untuk teks utama, JetBrains Mono untuk
+       label teknis/data — pemilihan ini disengaja karena JetBrains Mono
+       adalah typeface yang benar-benar dipakai di lingkungan kerja
+       computational science (editor kode, terminal), bukan sekadar
+       pilihan estetika monospace generik. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <!-- ======================================================================
+       HEADER
+       Fixed di atas, berubah dari transparan ke solid+blur saat discroll
+       melewati hero (lihat initHeaderScroll di main.js).
+       ====================================================================== -->
+  <header class="site-header" data-site-header>
+    <div class="container site-header__inner">
+      <a href="#hero" class="site-logo">
+        <span class="site-logo__name">Muhammad Akmal Husain</span>
+      </a>
+      <button type="button" class="menu-trigger" data-menu-trigger aria-label="Buka menu navigasi">
+        <span class="menu-trigger__icon"><span></span><span></span></span>
+        Menu
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       MENU OVERLAY
+       Panel navigasi penuh-layar, ditoggle via kelas .menu-open pada
+       <body> (lihat initMenuOverlay di main.js). Daftar tautan mengarah
+       ke id section pada halaman ini — TIDAK ada menu terpisah untuk
+       "Volunteering", "Experience", "Award" sebagai halaman berbeda;
+       semuanya adalah section dalam satu halaman panjang (single-page
+       layout), sesuai pola tema Forty asli.
+       ====================================================================== -->
+  <div class="menu-overlay" data-menu-overlay>
+    <button type="button" class="menu-overlay__close" data-menu-close aria-label="Tutup menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="menu-overlay__inner">
+      <ul class="menu-overlay__list">
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#volunteering">Volunteering</a></li>
+        <li><a href="#awards">Awards &amp; Achievements</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="menu-overlay__meta">
+        <a href="https://github.com/AkmalHusain2003" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/muhammad-akmal-husain-8298b7209/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:akmalhusain2003@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       HERO
+       Judul + subjudul + tombol "Get Started" yang melakukan smooth-scroll
+       ke section About. Diagram orbit SVG dan scroll-indicator (bouncing
+       arrow) yang sebelumnya ada di sini SUDAH DIHAPUS atas permintaan
+       eksplisit — latar hero akan diisi foto JWST secara manual nanti.
+       Lihat komentar "LATAR JWST" di bawah untuk instruksi menambahkannya.
+       ====================================================================== -->
+  <section id="hero" class="hero">
+    <div class="hero__inner">
+      <p class="hero__eyebrow">Pipeline Engineer | Data Engineer | ML Engineer | Astrophysicist</p>
+      <h1 class="hero__title">
+        Turning large-scale data into <span class="highlight">precise insight</span>
+      </h1>
+      <p class="hero__subtitle">
+        M.Sc. Computational Science &amp; B.Sc. Astronomy from Institut Teknologi Bandung. Focused on building ML pipelines with advanced statistical methods and optimization techniques for astrophysics research and large-scale high-dimensional data systems.
+      </p>
+      <div class="hero__actions">
+        <a href="#about" class="btn btn--primary">
+          Get Started
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </a>
+        <a href="#projects" class="btn btn--ghost">View Projects</a>
+        <a href="assets/document/CV - Muhammad Akmal Husain.pdf" class="btn btn--ghost" target="_self" rel="noopener noreferrer">Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       ABOUT ("Tentang Saya") — poin 2 permintaan.
+       Setiap blok anak diberi kelas .reveal dengan arah berbeda
+       (reveal--left untuk visual, reveal--right untuk teks) dan
+       data-reveal-index untuk delay berjenjang, menghasilkan efek
+       "hilang timbul" yang diminta: memudar masuk saat discroll ke
+       section ini, memudar keluar lagi saat discroll menjauh (lihat
+       mekanisme initRevealObserver di main.js).
+       ====================================================================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">About Me</p>
+        <h2 class="section__title">Science as Foundation, Data as Medium</h2>
+      </div>
+
+      <div class="about__grid">
+        <div class="about__visual reveal reveal--left" data-reveal-index="1">
+          <div class="about__visual-frame" aria-hidden="true"></div>
+          <img src="assets/images/profile/IMG_2863.jpg" alt="Muhammad Akmal Husain" />
+
+          <div class="about__stats">
+            <div class="about__stat">
+              <span class="about__stat-value">5+ Years</span>
+              <span class="about__stat-label">Experience with Python</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-value">3+ Years</span>
+              <span class="about__stat-label">Experience with Linux HPC</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-value">2+ Years</span>
+              <span class="about__stat-label">Research Experience</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-value">2</span>
+              <span class="about__stat-label">Open-Source Packages</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about__body reveal reveal--right" data-reveal-index="2">
+          <p>
+            I am a Computational Scientist and Machine Learning practitioner (M.Sc. Computational Science, B.Sc. Astronomy, Institut Teknologi Bandung) dedicated to advancing AI through rigorous mathematical foundations. My core expertise lies in statistical modeling and machine learning—both supervised and unsupervised—focusing on extracting reliable structures from massive, high-dimensional datasets. Driven by a strict first-principles philosophy in both mathematical derivation and scientific coding, I strive to build robust, scalable AI systems that bridge theoretical depth with practical, real-world impact.
+          </p>
+          <p>
+            My research applies these mathematically grounded approaches to complex astrophysical domains. During my master's research, I developed ENTRAP, a hybrid algorithm integrating density-based clustering with Topological Data Analysis (TDA) to identify open star clusters in Gaia DR3 data. Most recently, I completed the ASPIRE research internship at the Anton Pannekoek Institute for Astronomy (University of Amsterdam), where I built an N-body simulation pipeline to study the dynamics of the Kepler-221 exoplanet system. Ultimately, I aim to continuously improve AI/ML methodologies, overcoming their current limitations to deliver innovative solutions for multidisciplinary challenges.
+          </p>
+
+          <p class="about__skills-title">Technical Skills</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Cython</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Basic C / C++</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">Scikit-Learn</span>
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">Numpy</span>
+            <span class="skill-tag">Numba</span>
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">Seaborn</span>
+            <span class="skill-tag">AMUSE</span>
+            <span class="skill-tag">Astropy</span>
+            <span class="skill-tag">Statistical Learning, Inference, and Modeling</span>
+            <span class="skill-tag">Scientific Computing</span>
+            <span class="skill-tag">Linux HPC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PROJECTS — poin 4 permintaan.
+       Grid kartu DIRENDER SECARA DINAMIS oleh renderProjectPreview() di
+       main.js, membaca data dari assets/js/projects-data.js. HTML di
+       sini hanya menyediakan KERANGKA (header, filter, target grid
+       kosong) — lihat atribut data-project-grid sebagai titik injeksi.
+
+       Setiap kartu memiliki tombol "Lihat Lebih Lengkap" yang mengarah
+       ke pages/project.html?id=<id-project>, sesuai permintaan poin 4.
+       ====================================================================== -->
+  <section id="projects" class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Portfolio</p>
+        <h2 class="section__title">Project &amp; Research</h2>
+        <p class="section__subtitle">
+          Showcasing my scientific projects—spanning topological clustering algorithms, machine learning models, and N-body dynamical simulations.
+        </p>
+      </div>
+
+      <div class="project-filter reveal reveal--up" data-reveal-index="1">
+        <button type="button" class="project-filter__btn is-active" data-filter="all">All</button>
+        <button type="button" class="project-filter__btn" data-filter="research">Astrophysical Research</button>
+        <button type="button" class="project-filter__btn" data-filter="ml-tools">ML Tools</button>
+        <button type="button" class="project-filter__btn" data-filter="deep-learning">Deep Learning</button>
+        <!-- Tombol ini SENGAJA TIDAK memakai atribut data-filter seperti
+             tombol di atasnya. Fungsinya berbeda secara mendasar: tombol
+             lain MEMFILTER kartu yang sudah ada di grid (mencocokkan
+             data-category), sedangkan tombol ini hanya MEMUNCULKAN panel
+             berisi dua pilihan navigasi (BSc/MSc) — sama sekali tidak
+             menyentuh grid. Jika tombol ini diberi data-filter="other",
+             initProjectFilter() di main.js akan mencoba mencari kartu
+             dengan data-category="other" (tidak ada satu pun), membuat
+             grid kosong total saat diklik — maka dipakai atribut terpisah
+             data-toggle-other-projects yang ditangani fungsi berbeda
+             (initOtherProjectsToggle di main.js), tidak bersinggungan
+             dengan logika filter sama sekali. -->
+        <button type="button" class="project-filter__btn" data-toggle-other-projects aria-expanded="false">
+          Other Projects
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 0.35em; vertical-align: -2px; transition: transform 0.25s ease;"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Panel dropdown "Other Projects": tersembunyi secara default
+           (kelas .is-open ditambahkan lewat JS saat tombol di atas
+           diklik). Berisi dua tautan menuju halaman arsip terpisah per
+           jenjang pendidikan — TIDAK terhubung dengan sistem filter
+           grid maupun projects-data.js sama sekali; ini navigasi
+           mandiri menuju halaman lain. -->
+      <div class="other-projects-panel" data-other-projects-panel>
+        <a href="pages/bsc-projects.html" class="other-projects-panel__link">
+          <span class="other-projects-panel__title">BSc Project</span>
+          <span class="other-projects-panel__desc">Various Projects in Astronomy Study Program</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="pages/msc-projects.html" class="other-projects-panel__link">
+          <span class="other-projects-panel__title">MSc Project</span>
+          <span class="other-projects-panel__desc">Various Projects in Computational Science Study Program</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="project-slider" data-project-slider>
+        <div class="project-slider__controls">
+          <button type="button" class="project-slider__btn" data-slider-prev aria-label="Previous projects">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="project-slider__btn" data-slider-next aria-label="Next projects">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="project-slider__viewport">
+          <div class="project-slider__track" data-project-grid data-project-track></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       EXPERIENCE — poin 6 permintaan.
+       Urutan kronologis TERBALIK (terbaru di atas), pola timeline
+       standar untuk riwayat profesional. ASPIRE ditandai sebagai peran
+       AKTIF (kelas .is-current, memberi node timeline terisi penuh +
+       badge "Aktif") mengikuti konfirmasi eksplisit Akmal bahwa peran
+       Graduate Researcher di ITB telah selesai dan ASPIRE adalah fokus
+       riset yang sedang berjalan saat ini.
+       ====================================================================== -->
+  <section id="experience" class="section">
+    <div class="container container--narrow">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">History</p>
+        <h2 class="section__title">Experience</h2>
+      </div>
+
+      <div class="timeline" style="--timeline-accent: var(--color-accent-1);">
+        <div class="timeline-item reveal reveal--up" data-reveal-index="1">
+          <p class="timeline-item__period">June 2026 &ndash; August 2026</p>
+          <h3 class="timeline-item__title">Research Intern — ASPIRE Program</h3>
+          <p class="timeline-item__org">Anton Pannekoek Institute for Astronomy, University of Amsterdam · Supervised by Dr. T. C. N. Boekholt</p>
+          <div class="timeline-item__desc">
+            <p>Building an N-body simulation pipeline (AMUSE/Huayno) to investigate the dynamics of the Kepler-221 exoplanet system, working asynchronously.</p>
+            <ul>
+              <li>Developed a complete Transit Timing Variation (TTV) analysis pipeline, including period detection via BLS periodogram and multi-start sinusoidal fitting.</li>
+              <li>Corrected the initial conditions of the simulation using the full two-body Kepler III law, verified to numerical precision of approximately e ~ 10⁻¹⁶.</li>
+              <li>Diagnosed and fixed astropy data-type incompatibilities in the analysis pipeline, and derived a transit-duration estimation function from first geometric principles.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="2">
+          <p class="timeline-item__period">September 2024 &ndash; August 2026</p>
+          <h3 class="timeline-item__title">Graduate Researcher</h3>
+          <p class="timeline-item__org">Institut Teknologi Bandung — Research, Community Service, and Innovation Program (P2MI)</p>
+          <div class="timeline-item__desc">
+            <p>Developed ENTRAP as part of my master's thesis research, covering the full cycle from methodology derivation, implementation, to validation on nine test stellar clusters.</p>
+            <ul>
+              <li>Designed and implemented four ENTRAP algorithmic components (DEK, GPEE, Memory_Manager, and sklearn-style API class) from scratch.</li>
+              <li>Built the GUMM package (Gaussian-Uniform Mixture Model) in Cython with OpenMP parallelization.</li>
+              <li>Prepared comprehensive thesis documentation in formal academic English style.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="3">
+          <p class="timeline-item__period">September 2024 &ndash; November 2025</p>
+          <h3 class="timeline-item__title">Radio Signal Data Reduction & Analysis Collaborator</h3>
+          <p class="timeline-item__org">High-Energy Physics Project, Institut Teknologi Bandung</p>
+          <div class="timeline-item__desc">
+            <p>Used a signal-processing and data-reduction pipeline on a Linux HPC cluster to clean and extract low-signal data, then performed advanced statistical analysis and fitting to extract physical parameters from the cleaned data.</p>
+            <ul>
+              <li>Results published in a peer-reviewed Q1 journal (MNRAS).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="4">
+          <p class="timeline-item__period">February 2025 &ndash; June 2026</p>
+          <h3 class="timeline-item__title">Laboratory Assistant</h3>
+          <p class="timeline-item__org">Machine Learning & Advanced Machine Learning, Institut Teknologi Bandung</p>
+          <div class="timeline-item__desc">
+            <p>Taught supervised vs. unsupervised learning fundamentals, data preprocessing, and model selection to graduate students.</p>
+            <ul>
+              <li>Designed hands-on classic NN, RF, Decision Tree, CNN, SVM, and K-Means assignments using TensorFlow, PyTorch, and Scikit-Learn.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="5">
+          <p class="timeline-item__period">September 2024 &ndash; October 2024</p>
+          <h3 class="timeline-item__title">Mentor, International Virtual Course</h3>
+          <p class="timeline-item__org">International Virtual Course Program</p>
+          <div class="timeline-item__desc">
+            <p>Guided participants in multiwavelength astronomical data processing using Python and Linux HPC.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       VOLUNTEERING — poin 5 permintaan.
+       Menggunakan struktur timeline yang sama dengan Experience, namun
+       dengan --timeline-accent berbeda (hijau sage, bukan cyan) supaya
+       kedua section punya identitas visual berbeda meski markup identik
+       — pola reuse komponen yang didokumentasikan di main.css bagian
+       "TIMELINE (EXPERIENCE & VOLUNTEERING)".
+       ====================================================================== -->
+  <section id="volunteering" class="section section--alt">
+    <div class="container container--narrow">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Contributions</p>
+        <h2 class="section__title">Volunteering &amp; Organizations</h2>
+      </div>
+
+      <div class="timeline" style="--timeline-accent: var(--color-accent-5);">
+        <div class="timeline-item reveal reveal--up" data-reveal-index="1">
+          <p class="timeline-item__period">September 2023 &ndash; January 2024</p>
+          <h3 class="timeline-item__title">Head of Graphic Design Coordinator, Analema Magazine 2023</h3>
+          <p class="timeline-item__org">Himpunan Mahasiswa Astronomi ITB (Himastron ITB)</p>
+          <div class="timeline-item__desc">
+            <p>As the Head of Graphic Design Coordinator for Analema Magazine 2023, I was responsible for creating a comprehensive timeline and managing a team of 8 designers. I ensured that the magazine's production was completed on schedule while maintaining high-quality design standards. This role required strong time management, leadership, and attention to detail to deliver a visually appealing and cohesive publication.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="2">
+          <p class="timeline-item__period">February 2023 &ndash; January 2024</p>
+          <h3 class="timeline-item__title">Head of Media, Communication, and Information, Himastron Executive Board 2023/2024</h3>
+          <p class="timeline-item__org">Himpunan Mahasiswa Astronomi ITB (Himastron ITB)</p>
+          <div class="timeline-item__desc">
+            <p>Prepare and develop grand designs for various materials and all graphic media used within the organization. Manage and oversee the organization's social media platforms, create and implement publication timelines, and maintain a platform or website to showcase the creative expressions of all organization members. Additionally, organize and maintain all files in the organization's Google Drive to ensure efficient file management and accessibility.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="3">
+          <p class="timeline-item__period">September 2022 &ndash; April 2023</p>
+          <h3 class="timeline-item__title">Leader of Video Script Team, Ministry of Propaganda, Citaraya Cabinet</h3>
+          <p class="timeline-item__org">Kabinet KM ITB</p>
+          <div class="timeline-item__desc">
+            <p>Writing a video script discussing current technological developments.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="4">
+          <p class="timeline-item__period">September 2022 &ndash; November 2022</p>
+          <h3 class="timeline-item__title">Head of Graphic Design and Creative Division, Graduation Ceremony 2022</h3>
+          <p class="timeline-item__org">Himpunan Mahasiswa Astronomi ITB (Himastron ITB)</p>
+          <div class="timeline-item__desc">
+            <p>Prepare and create grand designs, including posters, Instagram feeds, and Instagram stories, to meet publication needs. Develop timelines for publication workflows and coordinate a team of 10-11 staff members throughout the event. Additionally, plan and oversee the creation of props and decorations to ensure a cohesive and visually appealing event presentation.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="5">
+          <p class="timeline-item__period">June 2022 &ndash; September 2022</p>
+          <h3 class="timeline-item__title">Staff of Human Resources Division, Pembinaan Anggota Muda 2022</h3>
+          <p class="timeline-item__org">Himpunan Mahasiswa Astronomi ITB (Himastron ITB)</p>
+          <div class="timeline-item__desc">
+            <p>I oversee the Materials and Methods Division to ensure smooth interpersonal relationships and act as a mediator and conflict resolution facilitator in case any disputes within the division.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="6">
+          <p class="timeline-item__period">September 2021 &ndash; April 2022</p>
+          <h3 class="timeline-item__title">Staff of Graphic Design, Ministry of Innovation and Implementation, Akar Asa Cabinet</h3>
+          <p class="timeline-item__org">Kabinet KM ITB</p>
+        </div>
+
+        <div class="timeline-item reveal reveal--up" data-reveal-index="7">
+          <p class="timeline-item__period">September 2021 &ndash; December 2021</p>
+          <h3 class="timeline-item__title">Head of Graphic Design and Documentation Division, Himastron 2021 Election</h3>
+          <p class="timeline-item__org">Himpunan Mahasiswa Astronomi ITB (Himastron ITB)</p>
+          <div class="timeline-item__desc">
+            <p>Develop and produce impactful designs, including posters, Instagram feeds, and stories, to enhance the event's visual appeal. Establish publication timelines for Instagram content and collaborate with a team of four staff members to ensure efficient execution throughout the event.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       AWARD & PRESTASI — poin 7 permintaan.
+
+       CATATAN AKURASI PENTING: Saya TIDAK memiliki data spesifik
+       mengenai penghargaan atau prestasi yang pernah Anda terima —
+       baik dari riwayat percakapan sebelumnya maupun dari berkas
+       index.md lama repo ini (sudah dihapus setelah digantikan
+       index.html). Daripada mengarang isi (yang akan melanggar prinsip
+       akurasi yang Anda tekankan), tiga kartu di bawah ini SENGAJA
+       diisi dengan placeholder eksplisit yang jelas terlihat sebagai
+       "isi contoh", bukan data nyata.
+
+       Silakan ganti judul, tahun, dan deskripsi tiap kartu dengan
+       prestasi Anda yang sebenarnya. Struktur kartu (award-card) sudah
+       siap pakai — cukup duplikasi blok <div class="award-card"> untuk
+       menambah entri baru, atau hapus yang tidak diperlukan.
+       ====================================================================== -->
+  <section id="awards" class="section">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Recognition</p>
+        <h2 class="section__title">Awards &amp; Achievements</h2>
+      </div>
+
+      <div class="award-grid">
+        <div class="award-card reveal reveal--up" data-reveal-index="1">
+          <div class="award-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+          </div>
+          <p class="award-card__year">2024</p>
+          <h3 class="award-card__title">Dean's Award FMIPA ITB, Semester I 2023/2024</h3>
+          <p class="award-card__desc">Awarded to students with a GPA above 3.5 and at least 15 credit hours in the respective semester. Achieved a semester GPA of 4.00.</p>
+        </div>
+
+        <div class="award-card reveal reveal--up" data-reveal-index="2">
+          <div class="award-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+          </div>
+          <p class="award-card__year">2024</p>
+          <h3 class="award-card__title">International Conference on Space Science, Technology and Innovation (ICSSTI)</h3>
+          <p class="award-card__desc">Presented as a conference presenter on December 5, 2024, organized by the Centre for Space Science, Technology and Innovation (PUI-PT PSTIA-ITB). Conference proceedings paper published.</p>
+        </div>
+
+        <div class="award-card reveal reveal--up" data-reveal-index="3">
+          <div class="award-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+          </div>
+          <p class="award-card__year">2025</p>
+          <h3 class="award-card__title">IAU Symposium 398: MODEST-25 — Compact Objects and Binaries in Dense Stellar Systems</h3>
+          <p class="award-card__desc">Presented at Seoul National University, Seoul, Korea (June 16–20, 2025). Conference proceedings paper, "Analysis of a Septuple Open Cluster System and Its Extended Family in Gaia DR3," accepted and published on arXiv (<a href="https://arxiv.org/abs/2604.23093" target="_blank" rel="noopener">arXiv:2604.23093</a>).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PUBLICATIONS
+       Showcasing peer-reviewed publications, conference proceedings, and
+       research preprints. Links to full articles and arXiv preprints are
+       provided for direct access to the publications.
+       ====================================================================== -->
+  <section id="publications" class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Research Output</p>
+        <h2 class="section__title">Publications</h2>
+      </div>
+
+      <div class="publication-grid">
+        <div class="publication-card reveal reveal--up" data-reveal-index="1">
+          <div class="publication-card__meta">
+            <p class="publication-card__year">2025</p>
+            <span class="publication-card__badge">Symposium Paper</span>
+          </div>
+          <h3 class="publication-card__title">Analysis of a Septuple Open Cluster System and Its Extended Family in Gaia DR3</h3>
+          <p class="publication-card__journal">IAU Symposium 398: MODEST-25 — Compact Objects and Binaries in Dense Stellar Systems</p>
+          <p class="publication-card__desc">
+            Conference proceedings paper presented at Seoul National University, Korea (June 16–20, 2025). Analyzed complex stellar cluster systems using Gaia DR3 data and topological methods.
+          </p>
+          <div class="publication-card__links">
+            <a href="https://arxiv.org/abs/2604.23093" target="_blank" rel="noopener noreferrer" class="publication-link">
+              arXiv Preprint
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="publication-card reveal reveal--up" data-reveal-index="2">
+          <div class="publication-card__meta">
+            <p class="publication-card__year">2024</p>
+            <span class="publication-card__badge">Q1 Journal</span>
+          </div>
+          <h3 class="publication-card__title">Radio Signal Data Analysis and Reduction</h3>
+          <p class="publication-card__journal">Monthly Notices of the Royal Astronomical Society (MNRAS)</p>
+          <p class="publication-card__desc">
+            Peer-reviewed research on signal processing and data reduction techniques applied to high-energy physics data using Linux HPC infrastructure and advanced statistical analysis methods.
+          </p>
+          <div class="publication-card__links">
+            <a href="https://academic.oup.com/mnras/article/549/1/stag811/8666044" target="_blank" rel="noopener noreferrer" class="publication-link">
+              View Article
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="publication-footer reveal reveal--up" data-reveal-index="3">
+        <p class="publication-footer__text">
+          For a comprehensive and up-to-date list of all my publications, citations, and research metrics, visit my 
+          <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Google Scholar profile</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       CONTACT
+       Form ini bersifat FRONT-END SAJA — belum terhubung ke backend
+       pengiriman email apa pun. Tema Forty asli memakai Formspree.io
+       untuk ini; opsi yang sama (atau alternatif seperti Web3Forms,
+       EmailJS) dapat dihubungkan nanti dengan mengubah atribut `action`
+       pada elemen <form> di bawah. Untuk sekarang, submit tombol tidak
+       melakukan apa pun selain mencegah reload halaman standar browser.
+       ====================================================================== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section__header reveal reveal--up" data-reveal-index="0">
+        <p class="section__eyebrow">Contact</p>
+        <h2 class="section__title">Let’s Collaborate</h2>
+        <p class="section__subtitle">
+          Open to research discussions, collaboration opportunities, and Data Scientist / Data Engineer roles.
+        </p>
+      </div>
+
+      <div class="contact__grid">
+        <div class="reveal reveal--left" data-reveal-index="1">
+          <div class="contact-method">
+            <div class="contact-method__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+            </div>
+            <div>
+              <p class="contact-method__label">Email</p>
+              <a href="mailto:akmalhusain2003@gmail.com" class="contact-method__value">akmalhusain2003@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            </div>
+            <div>
+              <p class="contact-method__label">GitHub</p>
+              <a href="https://github.com/AkmalHusain2003" target="_blank" rel="noopener noreferrer" class="contact-method__value">AkmalHusain2003</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <p class="contact-method__label">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/muhammad-akmal-husain-8298b7209/" target="_blank" rel="noopener noreferrer" class="contact-method__value">Muhammad Akmal Husain</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+              <p class="contact-method__label">ORCID</p>
+              <a href="https://orcid.org/0009-0000-4703-6252" target="_blank" rel="noopener noreferrer" class="contact-method__value">0009-0000-4703-6252</a>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal reveal--right" data-reveal-index="2" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="a7de0258-0613-492f-babe-2049a353b658" />
+          <input type="hidden" name="subject" value="New portfolio contact message" />
+          <input type="hidden" name="from_name" value="Akmal Husain Portfolio" />
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__copy">&copy; 2026 Muhammad Akmal Husain.</p>
+      <div class="site-footer__socials">
+        <a href="https://github.com/AkmalHusain2003" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/muhammad-akmal-husain-8298b7209/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:akmalhusain2003@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       SCRIPTS
+       Urutan pemuatan PENTING: projects-data.js harus dimuat SEBELUM
+       main.js, karena main.js (fungsi renderProjectPreview) mengakses
+       array global PROJECTS yang didefinisikan di projects-data.js.
+       ====================================================================== -->
+  <script src="assets/js/projects-data.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

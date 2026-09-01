@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M.Sc. Project Archive — Muhammad Akmal Husain</title>
+  <meta name="description" content="Complete list of research projects completed during Muhammad Akmal Husain's Master of Science studies in Computational Science." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+
+  <!-- ======================================================================
+       HEADER & MENU OVERLAY
+       Struktur identik dengan pages/project.html — lihat komentar di
+       file tersebut untuk penjelasan lengkap. Disalin apa adanya di sini
+       supaya konsisten; jika Anda mengedit menu di satu halaman, ingat
+       untuk mengedit salinan yang sama di project.html, bsc-projects.html,
+       dan index.html juga (lihat PORTFOLIO_README.md bagian "Mengedit
+       Menu Navigasi" untuk daftar lengkap titik yang perlu disinkronkan).
+       ====================================================================== -->
+  <header class="site-header is-solid" data-site-header>
+    <div class="container site-header__inner">
+      <a href="../index.html" class="site-logo">
+        <span class="site-logo__name">Akmal Husain</span>
+        <span class="site-logo__role">Computational Scientist</span>
+      </a>
+      <button type="button" class="menu-trigger" data-menu-trigger aria-label="Buka menu navigasi">
+        <span class="menu-trigger__icon"><span></span><span></span></span>
+        Menu
+      </button>
+    </div>
+  </header>
+
+  <div class="menu-overlay" data-menu-overlay>
+    <button type="button" class="menu-overlay__close" data-menu-close aria-label="Tutup menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="menu-overlay__inner">
+      <ul class="menu-overlay__list">
+        <li><a href="../index.html#about">About Me</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#volunteering">Volunteering</a></li>
+        <li><a href="../index.html#awards">Awards &amp; Achievements</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <div class="menu-overlay__meta">
+        <a href="https://github.com/AkmalHusain2003" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/muhammad-akmal-husain-8298b7209/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:akmalhusain2003@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       KONTEN UTAMA
+       Header halaman statis (bukan dirender dinamis seperti project.html),
+       karena ini bukan halaman detail satu-item melainkan halaman arsip
+       daftar. Grid project DIRENDER DINAMIS oleh
+       renderEducationProjectGrid('msc') di education-projects.js,
+       membaca dari getProjectsByLevel('msc') di projects-data.js —
+       sehingga daftar di sini OTOMATIS bertambah jika Anda menambahkan
+       project baru dengan level: 'msc' ke projects-data.js, tanpa perlu
+       menyentuh file HTML ini sama sekali.
+       ====================================================================== -->
+  <main>
+    <section class="project-detail-header">
+      <div class="container">
+        <a href="../index.html#projects" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to Homepage
+        </a>
+        <span class="project-detail-header__tag">Project Archive</span>
+        <h1 class="project-detail-header__title">M.Sc. Projects</h1>
+        <p class="project-detail-header__subtitle">
+          All research and software engineering work completed during the Master of Science in Computational Science program at Institut Teknologi Bandung, including ongoing research internship work.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="project-grid" data-education-project-grid data-level="msc"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__copy">&copy; 2026 Muhammad Akmal Husain. Dibangun dengan HTML, CSS &amp; JavaScript murni.</p>
+      <div class="site-footer__socials">
+        <a href="https://github.com/AkmalHusain2003" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/muhammad-akmal-husain-8298b7209/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:akmalhusain2003@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/projects-data.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/education-projects.js"></script>
+
+</body>
+</html>
